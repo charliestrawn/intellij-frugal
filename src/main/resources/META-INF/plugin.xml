@@ -1,0 +1,50 @@
+<idea-plugin>
+    <id>dev.strawn.intellij-frugal</id>
+    <name>Frugal Language Support</name>
+    <vendor email="charlie@strawn.dev" url="https://github.com/charliestrawn">Charlie Strawn</vendor>
+
+    <description><![CDATA[
+    Adds comprehensive support for Frugal (.frugal) files to IntelliJ IDEA.
+    
+    This plugin provides:
+    - File type recognition for .frugal files
+    - Syntax highlighting
+    - Language server integration with frugal-ls
+    - Code completion and error detection
+    - Basic language features
+    
+    The plugin includes bundled frugal-ls binaries for Windows, macOS, and Linux.
+    No additional installation required! Falls back to system PATH if needed.
+    ]]></description>
+
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.lang</depends>
+
+    <resource-bundle>messages.FrugalBundle</resource-bundle>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- File Type -->
+        <fileType 
+            name="Frugal" 
+            implementationClass="dev.strawn.frugal.FrugalFileType" 
+            fieldName="INSTANCE" 
+            language="Frugal"
+            extensions="frugal"/>
+
+        <!-- Language -->
+        <lang.parserDefinition 
+            language="Frugal" 
+            implementationClass="dev.strawn.frugal.FrugalParserDefinition"/>
+            
+        <lang.syntaxHighlighterFactory 
+            language="Frugal" 
+            implementationClass="dev.strawn.frugal.FrugalSyntaxHighlighterFactory"/>
+
+        <!-- Language Server Protocol -->
+        <platform.lsp.serverSupportProvider implementation="dev.strawn.frugal.lsp.FrugalLspServerSupportProvider"/>
+    </extensions>
+
+    <actions>
+        <!-- Add custom actions here if needed -->
+    </actions>
+</idea-plugin>
