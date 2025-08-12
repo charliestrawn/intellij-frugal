@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '1.16.1'
+    id 'org.jetbrains.intellij.platform' version '2.7.1'
 }
 
 group = 'dev.strawn'
@@ -8,10 +8,9 @@ version = '1.0.0'
 
 repositories {
     mavenCentral()
-}
-
-dependencies {
-    // No additional dependencies needed for basic Java plugin
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
 def frugalLsVersion = "latest"
@@ -58,48 +57,38 @@ task downloadFrugalLsBinaries {
 
 processResources.dependsOn downloadFrugalLsBinaries
 
-intellij {
-    version = '2023.2.5'
-    type = 'IC'
-    plugins = ['com.intellij.java']
-}
-
-patchPluginXml {
-    sinceBuild = '232'
-    untilBuild = '241.*'
-    
-    pluginDescription = """
-    Adds support for Frugal (.frugal) files with language server integration.
-    
-    Features:
-    - Syntax highlighting for Frugal files
-    - Language server integration with frugal-ls
-    - Code completion and error detection
-    - File type recognition
-    """
-}
-
-signPlugin {
-    certificateChain = System.getenv("CERTIFICATE_CHAIN")
-    privateKey = System.getenv("PRIVATE_KEY")
-    password = System.getenv("PRIVATE_KEY_PASSWORD")
-}
-
-publishPlugin {
-    token = System.getenv("PUBLISH_TOKEN")
+dependencies {
+    intellijPlatform {
+        intellijIdeaUltimate("2025.1")
+        
+        // Plugin Dependencies
+        bundledPlugin("com.intellij.java")
+        
+        // Required for instrumentation
+        instrumentationTools()
+    }
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
-patchPluginXml {
-    changeNotes = """
-    Initial release of Frugal language support for IntelliJ IDEA.
+intellijPlatform {
+    pluginConfiguration {
+        ideaVersion {
+            sinceBuild = "251"
+            untilBuild = "252.*"
+        }
+    }
     
-    - Added syntax highlighting for .frugal files
-    - Integrated frugal-ls language server
-    - Basic language features support
-    """
+    signing {
+        certificateChain = System.getenv("CERTIFICATE_CHAIN")
+        privateKey = System.getenv("PRIVATE_KEY")
+        password = System.getenv("PRIVATE_KEY_PASSWORD")
+    }
+    
+    publishing {
+        token = System.getenv("PUBLISH_TOKEN")
+    }
 }

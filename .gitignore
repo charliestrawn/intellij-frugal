@@ -1,6 +1,7 @@
 # Gradle
 .gradle/
 build/
+.intellijPlatform/
 
 # Include wrapper jar (but exclude wrapper properties if they contain sensitive info)
 !gradle/wrapper/
