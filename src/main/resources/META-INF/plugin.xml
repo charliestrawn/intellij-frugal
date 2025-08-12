@@ -40,8 +40,8 @@
             language="Frugal" 
             implementationClass="dev.strawn.frugal.FrugalSyntaxHighlighterFactory"/>
 
-        <!-- Language Server Protocol -->
-        <platform.lsp.serverSupportProvider implementation="dev.strawn.frugal.lsp.FrugalLspServerSupportProvider"/>
+        <!-- Language Server Protocol - TODO: Enable when LSP API is available -->
+        <!-- <platform.lsp.serverSupportProvider implementation="dev.strawn.frugal.lsp.FrugalLspServerSupportProvider"/> -->
     </extensions>
 
     <actions>
