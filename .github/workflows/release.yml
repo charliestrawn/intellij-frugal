@@ -38,7 +38,7 @@ jobs:
       
     - name: Update version in build.gradle
       run: |
-        sed -i "s/version = '.*'/version = '${{ steps.version.outputs.VERSION }}'/" build.gradle
+        sed -i "0,/^version = '.*'/s//version = '${{ steps.version.outputs.VERSION }}'/" build.gradle
         
     - name: Build plugin
       run: ./gradlew buildPlugin
