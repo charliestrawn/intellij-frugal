@@ -90,22 +90,21 @@ publishPlugin {
     token = System.getenv("PUBLISH_TOKEN")
 }
 
-tasks {
-    withType(JavaCompile) {
-        sourceCompatibility = "17"
-        targetCompatibility = "17"
-    }
-    withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
-        kotlinOptions.jvmTarget = "17"
-    }
+tasks.withType(JavaCompile) {
+    sourceCompatibility = "17"
+    targetCompatibility = "17"
+}
 
-    patchPluginXml {
-        changeNotes = """
-        Initial release of Frugal language support for IntelliJ IDEA.
-        
-        - Added syntax highlighting for .frugal files
-        - Integrated frugal-ls language server
-        - Basic language features support
-        """
-    }
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+    kotlinOptions.jvmTarget = "17"
+}
+
+patchPluginXml {
+    changeNotes = """
+    Initial release of Frugal language support for IntelliJ IDEA.
+    
+    - Added syntax highlighting for .frugal files
+    - Integrated frugal-ls language server
+    - Basic language features support
+    """
 }
