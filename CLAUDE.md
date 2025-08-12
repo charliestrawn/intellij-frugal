@@ -73,8 +73,8 @@ src/main/
 
 ## Dependencies
 
-- IntelliJ Platform SDK (2023.2.5)
-- Kotlin stdlib
+- IntelliJ Platform SDK (2025.1)
+- Java 21 (required by IntelliJ 2025.1)
 - frugal-ls language server (bundled with plugin)
 
 ## Binary Management

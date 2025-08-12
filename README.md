@@ -51,8 +51,9 @@ This plugin integrates with [frugal-ls](https://github.com/charliestrawn/frugal-
 ## Development
 
 ### Prerequisites
-- Java 17+
-- IntelliJ IDEA (for testing)
+- Java 21+
+- IntelliJ IDEA 2025.1+ (for testing)
+- Gradle 8.6+
 
 ### Building
 ```bash
