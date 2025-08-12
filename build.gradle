@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.9.10'
     id 'org.jetbrains.intellij' version '1.16.1'
 }
 
@@ -12,7 +11,7 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    // No additional dependencies needed for basic Java plugin
 }
 
 def frugalLsVersion = "latest"
@@ -90,13 +89,9 @@ publishPlugin {
     token = System.getenv("PUBLISH_TOKEN")
 }
 
-tasks.withType(JavaCompile) {
-    sourceCompatibility = "17"
-    targetCompatibility = "17"
-}
-
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
-    kotlinOptions.jvmTarget = "17"
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 patchPluginXml {
